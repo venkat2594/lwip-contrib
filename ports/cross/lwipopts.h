@@ -6,9 +6,9 @@
 
 /*
  * Copyright (c) 2001-2004 Swedish Institute of Computer Science.
- * All rights reserved. 
- * 
- * Redistribution and use in source and binary forms, with or without modification, 
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
  *
  * 1. Redistributions of source code must retain the above copyright notice,
@@ -17,33 +17,26 @@
  *    this list of conditions and the following disclaimer in the documentation
  *    and/or other materials provided with the distribution.
  * 3. The name of the author may not be used to endorse or promote products
- *    derived from this software without specific prior written permission. 
+ *    derived from this software without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED 
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
- * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT 
- * SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT 
- * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING 
- * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+ * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
+ * SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT
+ * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+ * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
  * OF SUCH DAMAGE.
  *
  * This file is part of the lwIP TCP/IP stack.
- * 
+ *
  * Author: Adam Dunkels <adam@sics.se>
  *
  */
 #ifndef __LWIPOPTS_H__
 #define __LWIPOPTS_H__
-
-/*
- * Include user defined options first. Anything not defined in these files
- * will be set to standard values. Override anything you dont like!
- */
-#include "lwipopts.h"
-#include "lwip/debug.h"
 
 /*
    -----------------------------------------------
@@ -58,7 +51,7 @@
  */
 #define SYS_LIGHTWEIGHT_PROT            0
 
-/** 
+/**
  * NO_SYS==1: Provides VERY minimal functionality. Otherwise,
  * use lwIP facilities.
  */
@@ -75,7 +68,7 @@
  *    4 byte alignment -> #define MEM_ALIGNMENT 4
  *    2 byte alignment -> #define MEM_ALIGNMENT 2
  */
-#define MEM_ALIGNMENT                   1
+#define MEM_ALIGNMENT                   4
 
 /**
  * MEM_SIZE: the size of the heap memory. If the application will send
@@ -144,7 +137,7 @@
  * MEMP_NUM_SYS_TIMEOUT: the number of simulateously active timeouts.
  * (requires NO_SYS==0)
  */
-#define MEMP_NUM_SYS_TIMEOUT            3
+#define MEMP_NUM_SYS_TIMEOUT            (3+2)
 
 /**
  * MEMP_NUM_NETBUF: the number of struct netbufs.
@@ -160,20 +153,20 @@
 
 /**
  * MEMP_NUM_TCPIP_MSG_API: the number of struct tcpip_msg, which are used
- * for callback/timeout API communication. 
+ * for callback/timeout API communication.
  * (only needed if you use tcpip.c)
  */
 #define MEMP_NUM_TCPIP_MSG_API          8
 
 /**
  * MEMP_NUM_TCPIP_MSG_INPKT: the number of struct tcpip_msg, which are used
- * for incoming packets. 
+ * for incoming packets.
  * (only needed if you use tcpip.c)
  */
 #define MEMP_NUM_TCPIP_MSG_INPKT        8
 
 /**
- * PBUF_POOL_SIZE: the number of buffers in the pbuf pool. 
+ * PBUF_POOL_SIZE: the number of buffers in the pbuf pool.
  */
 #define PBUF_POOL_SIZE                  8
 
@@ -186,6 +179,21 @@
  * LWIP_ARP==1: Enable ARP functionality.
  */
 #define LWIP_ARP                        1
+
+/*
+   ---------------------------------
+   --------- Ether options ---------
+   ---------------------------------
+*/
+/** ETH_PAD_SIZE: number of bytes added before the ethernet header to ensure
+ * alignment of payload after that header. Since the header is 14 bytes long,
+ * without this padding e.g. addresses in the IP header will not be aligned
+ * on a 32-bit boundary, so setting this to 2 can speed up 32-bit-platforms.
+ *
+ * On the Stellaris ARM ethernet peripheral, the first two bytes are
+ * used as the packet length, plus it aligns the rest of the packet.
+ */
+#define ETH_PAD_SIZE                    2
 
 /*
    --------------------------------
@@ -276,7 +284,7 @@
 /**
  * LWIP_DHCP==1: Enable DHCP module.
  */
-#define LWIP_DHCP                       0
+#define LWIP_DHCP                       1
 
 
 /*
@@ -306,7 +314,7 @@
    ----------------------------------
 */
 /**
- * LWIP_IGMP==1: Turn on IGMP module. 
+ * LWIP_IGMP==1: Turn on IGMP module.
  */
 #define LWIP_IGMP                       0
 

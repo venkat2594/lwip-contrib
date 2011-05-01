@@ -32,7 +32,7 @@
 #
 
 CONTRIBDIR=../..
-LWIPARCH=$(CONTRIBDIR)/ports/arm
+LWIPARCH=$(CONTRIBDIR)/ports/cross
 CROSS_COMPILE = arm-none-eabi-
 SYS_INCLUDE = /opt/CodeSourcery/arm-2010q1-188-arm-none-eabi/Sourcery_G++_Lite/arm-none-eabi/include/
 
@@ -43,7 +43,7 @@ LWIPDIR=$(CONTRIBDIR)/../lwip/src
 # Convention for where the build detritus ends up
 BUILD_DIR = obj/
 
-# Quiet vs. verbose
+# Quiet vs. verbose: to make things verbose, put a # in front of the @
 Q	= @
 
 # Make variables (CC, etc...)
@@ -102,11 +102,6 @@ $(BUILD_DIR)%.o: %.c
 
 all: $(LWIPLIB) 
 
-debug:
-	@echo $(LWIPFILES)
-	@echo $(LWIPOBJS)
-	@echo $(VPATH)
-
 clean:
 	rm -f $(BUILD_DIR)*.o $(LWIPLIB) *.s $(BUILD_DIR)depend
 
@@ -115,7 +110,7 @@ depend dep: $(BUILD_DIR)depend
 -include $(BUILD_DIR)depend
 
 $(LWIPLIB): $(LWIPOBJS)
-	$(Q)$(AR) -cs $@ $^
+	$(AR) -rc $@ $^
 
 $(BUILD_DIR)depend: $(LWIPFILES)
 	$(Q)$(CC) $(CFLAGS) -MM $^ > $@ || rm -f $(BUILD_DIR)depend
