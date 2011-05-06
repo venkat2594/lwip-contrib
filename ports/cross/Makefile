@@ -40,6 +40,12 @@ SYS_INCLUDE = /opt/CodeSourcery/arm-2010q1-188-arm-none-eabi/Sourcery_G++_Lite/a
 #default assumes it's a dir named lwip at the same level as the contrib module
 LWIPDIR=$(CONTRIBDIR)/../lwip/src
 
+#Set this to where you have the arch dir for your system for arch/sys_arch.h and arch/cc.h
+INC_ARCH_DIR=../../../wip/src
+FREERTOS=../../../FreeRTOS
+RTOS_SOURCE_DIR=$(FREERTOS)/Source
+
+
 # Convention for where the build detritus ends up
 BUILD_DIR = obj/
 
@@ -61,8 +67,13 @@ OBJDUMP	= $(CROSS_COMPILE)objdump
 CFLAGS	= -c -g -Wall -DIPv4 -DLWIP_DEBUG -isystem $(SYS_INCLUDE)
 
 CFLAGS	+=\
-	-I$(LWIPDIR)/include -I$(LWIPARCH)/include -I$(LWIPDIR)/include/ipv4 \
-	-I$(LWIPDIR) -I./include
+	-I$(LWIPDIR)/include \
+	-I$(LWIPARCH)/include \
+	-I$(LWIPDIR)/include/ipv4 \
+	-I./include \
+	-I$(INC_ARCH_DIR) \
+	-I$(RTOS_SOURCE_DIR)/include \
+	-I$(RTOS_SOURCE_DIR)/portable/GCC/ARM_CM3 
 
 # COREFILES, CORE4FILES: The minimum set of files needed for lwIP.
 COREFILES=$(LWIPDIR)/core/mem.c $(LWIPDIR)/core/memp.c $(LWIPDIR)/core/netif.c \
