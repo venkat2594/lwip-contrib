@@ -62,7 +62,7 @@ CFLAGS	= -c -g -Wall -DIPv4 -DLWIP_DEBUG -isystem $(SYS_INCLUDE)
 
 CFLAGS	+=\
 	-I$(LWIPDIR)/include -I$(LWIPARCH)/include -I$(LWIPDIR)/include/ipv4 \
-	-I$(LWIPDIR) -I.
+	-I$(LWIPDIR) -I./include
 
 # COREFILES, CORE4FILES: The minimum set of files needed for lwIP.
 COREFILES=$(LWIPDIR)/core/mem.c $(LWIPDIR)/core/memp.c $(LWIPDIR)/core/netif.c \
