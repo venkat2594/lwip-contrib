@@ -33,6 +33,9 @@
 
 CONTRIBDIR=../..
 LWIPARCH=$(CONTRIBDIR)/ports/cross/src
+
+TOP_LEVEL_PROGRAM=../../../LM3S8962ek
+
 CROSS_COMPILE = arm-none-eabi-
 SYS_INCLUDE = /opt/CodeSourcery/arm-2010q1-188-arm-none-eabi/Sourcery_G++_Lite/arm-none-eabi/include/
 
@@ -71,7 +74,7 @@ CFLAGS	+=\
 	-I$(LWIPDIR)/include/ipv4 \
 	-I./src/include \
 	-I./src/include/LM3S \
-	-I../../../wip/src \
+	-I$(TOP_LEVEL_PROGRAM)/src \
 	-I$(RTOS_SOURCE_DIR)/include \
 	-I$(RTOS_SOURCE_DIR)/portable/GCC/ARM_CM3 
 
