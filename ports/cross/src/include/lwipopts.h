@@ -32,6 +32,8 @@
 #ifndef __LWIPOPTS_H__
 #define __LWIPOPTS_H__
 
+#include "logger.h"
+
 #define TCPIP_THREAD_NAME               "tcp-ip"
 #define TCPIP_THREAD_STACKSIZE          350
 #define TCPIP_THREAD_PRIO               3
@@ -52,8 +54,7 @@
 
 #define LWIP_TCP                        1
 
-extern void spewPrintf(const char *pcString, ...);
-#define LWIP_PLATFORM_DIAG(x) {spewPrintf x;}
+#define LWIP_PLATFORM_DIAG(x) {lprintf x;}
 
 #define LWIP_DEBUG						1
 
