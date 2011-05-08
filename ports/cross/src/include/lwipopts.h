@@ -45,7 +45,7 @@
 
 #define NOT_LWIP_DEBUG                  0
 #define DBG_TYPES_ON                    0x00
-#define LWIP_DBG_TYPES_ON               LWIP_DBG_OFF
+#define LWIP_DBG_TYPES_ON               LWIP_DBG_ON
 
 #define MEMP_SANITY_CHECK               1
 #define ARP_QUEUEING                    1
