@@ -37,7 +37,7 @@ LWIPARCH=$(CONTRIBDIR)/ports/cross/src
 TOP_LEVEL_PROGRAM=../../../LM3S8962ek
 
 CROSS_COMPILE = arm-none-eabi-
-SYS_INCLUDE = /opt/CodeSourcery/arm-2010q1-188-arm-none-eabi/Sourcery_G++_Lite/arm-none-eabi/include/
+#SYS_INCLUDE = /opt/CodeSourcery/arm-2010q1-188-arm-none-eabi/Sourcery_G++_Lite/arm-none-eabi/include/
 
 #Set this to where you have the lwip core module checked out from CVS
 #default assumes it's a dir named lwip at the same level as the contrib module
@@ -66,7 +66,7 @@ STRIP	= $(CROSS_COMPILE)strip
 OBJCOPY	= $(CROSS_COMPILE)objcopy
 OBJDUMP	= $(CROSS_COMPILE)objdump
 
-CFLAGS	= -c -g -Wall -DIPv4 -DLWIP_DEBUG -isystem $(SYS_INCLUDE)
+CFLAGS	= -c -g -Wall -DIPv4 -DLWIP_DEBUG
 
 CFLAGS	+=\
 	-I$(LWIPDIR)/include \
