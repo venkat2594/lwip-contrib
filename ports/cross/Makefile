@@ -37,7 +37,6 @@ LWIPARCH=$(CONTRIBDIR)/ports/cross/src
 TOP_LEVEL_PROGRAM=../../../LM3S8962ek
 
 CROSS_COMPILE = arm-none-eabi-
-#SYS_INCLUDE = /opt/CodeSourcery/arm-2010q1-188-arm-none-eabi/Sourcery_G++_Lite/arm-none-eabi/include/
 
 #Set this to where you have the lwip core module checked out from CVS
 #default assumes it's a dir named lwip at the same level as the contrib module
@@ -66,7 +65,25 @@ STRIP	= $(CROSS_COMPILE)strip
 OBJCOPY	= $(CROSS_COMPILE)objcopy
 OBJDUMP	= $(CROSS_COMPILE)objdump
 
-CFLAGS	= -c -g -Wall -DIPv4 -DLWIP_DEBUG
+
+#
+# The flags passed to the compiler.
+#
+CFLAGS =	-mthumb \
+		-mcpu=cortex-m3 \
+		-Os \
+		-ffunction-sections \
+		-fdata-sections \
+		-std=c99 \
+		-Wall \
+		-pedantic \
+		-DPART_$(PART) \
+		-c
+
+# Build for debug
+CFLAGS +=	-g
+
+CFLAGS += -DIPv4 -DLWIP_DEBUG
 
 CFLAGS	+=\
 	-I$(LWIPDIR)/include \
@@ -112,14 +129,14 @@ $(BUILD_DIR)%.o: %.c
 	@echo "  $(CC) $<"
 	$(Q)$(CC) $(CFLAGS) -o $@ $<
 
-.PHONY: all clean
+.PHONY: all clean depend
 
 all: $(LWIPLIB) 
 
 clean:
-	rm -f $(BUILD_DIR)*.o $(LWIPLIB) *.s $(BUILD_DIR)depend
+	rm -f $(BUILD_DIR)*.o $(BUILD_DIR)*.d $(LWIPLIB) *.s  $(BUILD_DIR)depend
 
-depend dep: $(BUILD_DIR)depend
+depend: $(BUILD_DIR)depend
 
 -include $(BUILD_DIR)depend
 
@@ -127,4 +144,5 @@ $(LWIPLIB): $(LWIPOBJS)
 	$(AR) -rc $@ $^
 
 $(BUILD_DIR)depend: $(LWIPFILES)
-	$(Q)$(CC) $(CFLAGS) -MM $^ > $@ || rm -f $(BUILD_DIR)depend
+	@echo "  Building dependancies."
+	$(Q)$(CC) $(CFLAGS) -MM $(addprefix -MT, $(LWIPOBJS)) -E $^ > $@ || rm -f $(BUILD_DIR)depend

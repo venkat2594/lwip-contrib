@@ -35,7 +35,7 @@
 #include "logger.h"
 
 #define TCPIP_THREAD_NAME               "tcp-ip"
-#define TCPIP_THREAD_STACKSIZE          350
+#define TCPIP_THREAD_STACKSIZE          7000
 #define TCPIP_THREAD_PRIO               3
 
 #define DEFAULT_THREAD_STACKSIZE        200
@@ -46,7 +46,7 @@
 #define NOT_LWIP_DEBUG                  0
 #define DBG_TYPES_ON                    0x00
 #define LWIP_DBG_TYPES_ON               LWIP_DBG_ON
-
+#define LWIP_DBG_MIN_LEVEL              0
 #define MEMP_SANITY_CHECK               1
 #define ARP_QUEUEING                    1
 
@@ -196,11 +196,14 @@
  */
 #define LWIP_TCP                        1
 
+#define LWIP_TCPIP_CORE_LOCKING       1
+#define LWIP_TCPIP_CORE_LOCKING_INPUT 1
+
 /* TCP Maximum segment size. */
 #define TCP_MSS                         1500
 
 /* TCP sender buffer space (bytes). */
-#define TCP_SND_BUF                     1500
+#define TCP_SND_BUF                     3000
 
 /**
  * TCP_WND: The size of a TCP window.
@@ -252,7 +255,7 @@
 /**
  * LWIP_DHCP==1: Enable DHCP module.
  */
-#define LWIP_DHCP                       1
+#define LWIP_DHCP                       0
 
 
 #define LWIP_PROVIDE_ERRNO				0
