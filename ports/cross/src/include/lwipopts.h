@@ -200,8 +200,13 @@
  */
 #define LWIP_TCP                        1
 
-#define LWIP_TCPIP_CORE_LOCKING       1
-#define LWIP_TCPIP_CORE_LOCKING_INPUT 1
+/*
+ * \todo Why do we have to turn on CORE_LOCKING
+ * and CORE_LOCKING_INPUT to get TCP/IP to work?
+ */
+
+#define LWIP_TCPIP_CORE_LOCKING         1
+#define LWIP_TCPIP_CORE_LOCKING_INPUT   1
 
 /* TCP Maximum segment size. */
 #define TCP_MSS                         1500
