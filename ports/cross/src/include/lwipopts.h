@@ -269,4 +269,13 @@
 
 #define LWIP_PROVIDE_ERRNO				0
 
+/*
+   ----------------------------------
+   ---------- CGI options -----------
+   ----------------------------------
+
+ */
+
+#define INCLUDE_HTTPD_CGI 				1
+
 #endif /* __LWIPOPTS_H__ */
