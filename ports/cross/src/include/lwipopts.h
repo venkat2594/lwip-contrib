@@ -271,11 +271,11 @@
 
 /*
    ----------------------------------
-   ---------- CGI options -----------
+   --------- HTTPD options ----------
    ----------------------------------
-
  */
 
 #define INCLUDE_HTTPD_CGI 				1
+#define INCLUDE_HTTPD_SSI				1
 
 #endif /* __LWIPOPTS_H__ */
