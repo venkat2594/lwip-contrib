@@ -86,6 +86,9 @@ CFLAGS +=	-g
 CFLAGS += -DIPv4 -DLWIP_DEBUG
 
 CFLAGS	+=\
+	-I$(TOP_LEVEL_PROGRAM)/src/app-opts \
+	-I$(TOP_LEVEL_PROGRAM)/src/quick-opts \
+	-I$(TOP_LEVEL_PROGRAM)/src/quick \
 	-I$(LWIPDIR)/include \
 	-I$(LWIPARCH)/include \
 	-I$(LWIPDIR)/include/ipv4 \
