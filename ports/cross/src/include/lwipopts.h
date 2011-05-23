@@ -277,5 +277,7 @@
 
 #define INCLUDE_HTTPD_CGI 				1
 #define INCLUDE_HTTPD_SSI				1
+#define USER_PROVIDES_ZERO_COPY_STATIC_TAGS 1
+#define HTTPD_CGI_USE_STATIC_BUFFER     1
 
 #endif /* __LWIPOPTS_H__ */
