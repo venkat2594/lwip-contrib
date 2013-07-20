@@ -34,7 +34,7 @@
 CONTRIBDIR=../..
 LWIPARCH=$(CONTRIBDIR)/ports/cross/src
 
-TOP_LEVEL_PROGRAM=../../../LM3S8962ek
+TOP_LEVEL_PROGRAM=../../../quickstart
 
 CROSS_COMPILE = arm-none-eabi-
 
